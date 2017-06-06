@@ -6,7 +6,6 @@ class cenum(object):
     default_names = None
 
     def __init__(self):
-        super(cenum, self).__init__()
         self.old = sys.gettrace()
         sys.settrace(self.tracer)
 
