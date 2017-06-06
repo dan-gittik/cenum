@@ -1,9 +1,11 @@
-# Enum
+# C Enum
 
-A nifty decorator that allows C-style enums definitions in Python:
+A nifty decorator that allows C-style enum definitions in Python.
 
 ```python
-@enum()
+from cenum import cenum
+
+@cenum()
 class A:
     a
     b

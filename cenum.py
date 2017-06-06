@@ -1,12 +1,12 @@
 import sys
 
 
-class enum(object):
+class cenum(object):
 
     default_names = None
 
     def __init__(self):
-        super(enum, self).__init__()
+        super(cenum, self).__init__()
         self.old = sys.gettrace()
         sys.settrace(self.tracer)
 
@@ -16,7 +16,11 @@ class enum(object):
             self.__class__.default_names = names
         self.names = [name for name in names if name not in self.default_names]
         for name in self.names:
-            frame.f_locals[name] = None
+            # Python 3.3 fix:
+            if '__locals__' in frame.f_locals:
+                frame.f_locals['__locals__'][name] = None
+            else:
+                frame.f_locals[name] = None
         sys.settrace(self.old)
 
     def __call__(self, cls):
@@ -30,7 +34,7 @@ class enum(object):
         return cls
 
 
-# Invoke enum on an empty class to capture the default attribute names.
-@enum()
+# Invoke cenum on an empty class to capture the default attribute names.
+@cenum()
 class _(object):
     pass

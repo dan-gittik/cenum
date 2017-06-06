@@ -1,7 +1,7 @@
-import enum
+import cenum
 
 
-@enum.enum()
+@cenum.cenum()
 class A(object):
     a
     b
@@ -9,7 +9,7 @@ class A(object):
     d
 
 
-def test_enum():
+def test_cenum():
     assert A.a == 0
     assert A.b == 1
     assert A.c == 10
